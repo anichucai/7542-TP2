@@ -54,6 +54,8 @@ void EBPF::setG(BpfReader* r, HASH* l, DGraph* g) {
                 g->addChild(instruction_id, (*l)[arg1]);
                 g->addChild(instruction_id, (*l)[arg2]);
             }
+        } else if (bpf_inst.typeInstruction() != RET) {
+            g->addChild(instruction_id, instruction_id+1);
         }
         _eof = r->getLine(&instruction);
         instruction_id++;

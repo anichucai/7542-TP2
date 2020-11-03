@@ -83,13 +83,13 @@ int DGraph::isCyclicDfs(int s) {
 
 /*
 void DGraph::print_DGraph() {
-    std::unordered_map<int,set<int>>::iterator it_map = this->nodes.begin();
+    std::unordered_map<int,std::set<int>>::iterator it_map = this->nodes.begin();
     for (;it_map != this->nodes.end(); ++it_map ) {
         std::cout << "NODE " << it_map->first << ": ";
         for (auto it = it_map->second.begin(); it != it_map->second.end(); ++it){
-            cout << *it <<"-";
+            std::cout << *it <<"-";
         }
-        cout << "\n";
+        std::cout << "\n";
     }
 }
 */
