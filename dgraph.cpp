@@ -54,6 +54,11 @@ int DGraph::_isCyclicDfs(int p, std::vector<int>* v, std::vector<int>* s) {
 
 int DGraph::isCyclicDfs(int s) {
     this->cant_nodes = this->cantNodes();
+
+    if (this->cant_nodes == 0) {
+        return NOT_CYCLIC;
+    }
+
     std::vector<int> visited;
     std::vector<int> stack;
 
