@@ -9,10 +9,10 @@ class EBpfThread : public Thread{
         Repository* repo;
 
  public:
-        EBpfThread(Repository &repo) {
+        explicit EBpfThread(Repository &repo) {
             this->repo = &repo;
         }
-        virtual void run() {
+        void run() override {
             std::string file_name;
             int has_file = this->repo->getKey(file_name);
             if (has_file == -1) {

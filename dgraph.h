@@ -22,7 +22,7 @@ class DGraph {
  private:
         std::set<int> getNodes();
         int _dfs(int p, std::vector<int> &v, std::vector<int> &s);
-        int _isFullyVisited(std::vector<int> &visited);
+        int _isFullyVisited(const std::vector<int> &visited);
         std::unordered_map<int, std::set<int>> nodes;
         int num_nodes = 0;
 };

@@ -9,7 +9,7 @@
 
 // PRIVATE METHODS
 
-void BpfInstruction::setLabel(std::string &inst) {
+void BpfInstruction::setLabel(const std::string &inst) {
     size_t end = inst.find(':');
     size_t start = 0;
 
@@ -25,7 +25,7 @@ void BpfInstruction::setLabel(std::string &inst) {
     this->label = inst.substr(start, end - start);
 }
 
-void BpfInstruction::setOpCode(std::string &inst) {
+void BpfInstruction::setOpCode(const std::string &inst) {
     int j = 0;
     size_t i = inst.find(":")+1;
     if (i == std::string::npos) {
@@ -43,7 +43,7 @@ void BpfInstruction::setOpCode(std::string &inst) {
     this->op_code[j] = '\0';
 }
 
-int BpfInstruction::getArgPos(std::string &inst) {
+int BpfInstruction::getArgPos(const std::string &inst) {
     size_t i = 0;
     if (this->has_label) {
         i += inst.find(":")+1;
@@ -62,12 +62,12 @@ int BpfInstruction::getArgPos(std::string &inst) {
     return i;
 }
 
-void BpfInstruction::setCantArguments(std::string &inst) {
+void BpfInstruction::setCantArguments(const std::string &inst) {
     this->num_arg = std::count(inst.begin(), inst.end(), ',');
     this->num_arg++;
 }
 
-void BpfInstruction::setArgs(std::string &inst) {
+void BpfInstruction::setArgs(const std::string &inst) {
     size_t start = this->getArgPos(inst);
     this->args = inst.substr(start);
     std::string::iterator it;
@@ -77,7 +77,7 @@ void BpfInstruction::setArgs(std::string &inst) {
 
 // PUBLIC METHODS
 
-BpfInstruction::BpfInstruction(std::string &instruction) {
+BpfInstruction::BpfInstruction(const std::string &instruction) {
     this->setOpCode(instruction);
     this->setLabel(instruction);
     this->setArgs(instruction);

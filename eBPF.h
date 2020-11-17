@@ -11,7 +11,7 @@
 
 class EBPF {
  public:
-        EBPF(std::string &file_name);
+        explicit EBPF(const std::string &file_name);
         int isCyclic();
         int isFullyVisited();
         void getResult(std::string &res);

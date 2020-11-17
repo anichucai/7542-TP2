@@ -7,7 +7,7 @@
 #include <string>
 #include <unordered_map>
 
-EBPF::EBPF(std::string &file_name): r(file_name) {
+EBPF::EBPF(const std::string &file_name): r(file_name) {
     setLabel();
     setG();
 }

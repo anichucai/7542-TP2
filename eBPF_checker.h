@@ -11,7 +11,7 @@
 
 class EBPFChecker {
  public:
-    EBPFChecker(int argc, char* argv[]);
+    explicit EBPFChecker(int argc, char* argv[]);
     void run();
     ~EBPFChecker();
  private:

@@ -8,11 +8,10 @@
 
 class Repository {
  public:
-        Repository();
-        Repository(std::vector<std::string> &keys);
+        explicit Repository(const std::vector<std::string> &keys);
         int getKey(std::string &key);
-        void addResult(std::string &key, std::string &res);
-        int getResult(std::string &key_res, std::string &res);
+        void addResult(const std::string &key, const std::string &res);
+        int getResult(const std::string &key_res, std::string &res);
         ~Repository();
 
  private:

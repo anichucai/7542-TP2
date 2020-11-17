@@ -7,7 +7,7 @@
 
 class BpfInstruction{
  public:
-        BpfInstruction(std::string &inst);
+        explicit BpfInstruction(const std::string &inst);
         bool hasLabel();
         int typeInstruction();
         void getLabel(std::string &label);
@@ -23,11 +23,11 @@ class BpfInstruction{
         bool has_label;
         int num_arg = 0;
 
-        void setLabel(std::string &inst);
-        void setOpCode(std::string &inst);
-        void setArgs(std::string &inst);
-        int getArgPos(std::string &inst);
-        void setCantArguments(std::string &inst);
+        void setLabel(const std::string &inst);
+        void setOpCode(const std::string &inst);
+        void setArgs(const std::string &inst);
+        int getArgPos(const std::string &inst);
+        void setCantArguments(const std::string &inst);
 };
 
 #endif  // BPF_INSTRUCTION_H_

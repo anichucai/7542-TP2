@@ -59,7 +59,7 @@ int DGraph::dfs() {
     return _dfs(0, visited, stack);
 }
 
-int DGraph::_isFullyVisited(std::vector<int> &visited) {
+int DGraph::_isFullyVisited(const std::vector<int> &visited) {
     for (int node = 0; node < this->num_nodes; node++) {
         if (visited[node] == 0) {
             return NOT_FULLY_VISITED;

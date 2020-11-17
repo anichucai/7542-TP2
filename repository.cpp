@@ -5,10 +5,7 @@
 #include <functional>
 #include <utility>
 
-Repository::Repository() {
-}
-
-Repository::Repository(std::vector<std::string> &keys) {
+Repository::Repository(const std::vector<std::string> &keys) {
     this->keys = keys;
     this->keys_res = keys;
 }
@@ -27,7 +24,7 @@ int Repository::getKey(std::string &key) {
     return 0;
 }
 
-void Repository::addResult(std::string &key, std::string &res) {
+void Repository::addResult(const std::string &key, const std::string &res) {
     m_write.lock();
     this->results.insert(std::pair <std::string, std::string>(key, res));
     m_write.unlock();

@@ -5,11 +5,11 @@
 #include "constants.h"
 
 
-BpfReader::BpfReader(std::string &file_name) {
+BpfReader::BpfReader(const std::string &file_name) {
     this->in_file.open(file_name);
 }
 
-bool BpfReader::emptyLine(std::string &line) {
+bool BpfReader::emptyLine(const std::string &line) {
     int i = 0;
     while (line[i] == ' ') {
         i++;
