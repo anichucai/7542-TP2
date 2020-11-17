@@ -12,16 +12,19 @@
 class DGraph {
  public:
         DGraph();
-        int addChild(int parent, int child);
-        int isCyclicDfs(int s);
-        // void print_DGraph();
-        int cantNodes();
+        void addChild(int parent, int child);
+        int isCyclic();
+        int isFullyVisited();
+        int dfs();
+        //void print_DGraph();
+        int numNodes();
         ~DGraph();
  private:
         std::set<int> getNodes();
-        int _isCyclicDfs(int p, std::vector<int>* v, std::vector<int>* s);
+        int _dfs(int p, std::vector<int> &v, std::vector<int> &s);
+        int _isFullyVisited(std::vector<int> &visited);
         std::unordered_map<int, std::set<int>> nodes;
-        int cant_nodes = 0;
+        int num_nodes = 0;
 };
 
-#endif  // DGRAPH_H_
+#endif    // DGRAPH_H_

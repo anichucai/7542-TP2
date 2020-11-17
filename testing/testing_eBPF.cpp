@@ -9,12 +9,11 @@ int main(int argc, char *argv[]){
     string line;
     string file_name = argv[1];
 
-    EBPF eBPF;
-    unordered_map<string, int> res;
+    EBPF eBPF(file_name);
     
-    eBPF.applyEBPF(file_name);
-    eBPF.getResults(&res);
-    cout << file_name << ": " << res[file_name] << endl;
+    string res;
+    eBPF.getResult(res);
+    cout << file_name << ": " << res << endl;
     
     return 0;
 }

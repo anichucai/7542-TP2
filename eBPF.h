@@ -4,21 +4,26 @@
 #include "bpf_instruction.h"
 #include "bpf_reader.h"
 #include "dgraph.h"
-#include "protected_vector.h"
-#include "protected_hash.h"
+#include "repository.h"
 
 #include <string>
 #include <unordered_map>
 
 class EBPF {
  public:
-        EBPF();
-        int identifyCycle(std::string file_name);
+        EBPF(std::string &file_name);
+        int isCyclic();
+        int isFullyVisited();
+        void getResult(std::string &res);
         ~EBPF();
 
  private:
-        void setG(BpfReader* r, std::unordered_map<std::string, int>* l, DGraph* g);
-        void setLabel(BpfReader* r, std::unordered_map<std::string, int>* l);
+       BpfReader r;
+       std::unordered_map<std::string, int> l;
+       DGraph g;
+
+       void setG();
+       void setLabel();
 };
 
 #endif   // EBPF_H_

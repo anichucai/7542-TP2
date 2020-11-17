@@ -2,30 +2,26 @@
 #define EBPF_THREAD_H_
 
 #include "base_thread.cpp"
-
-#include "protected_vector.h"
-#include "protected_hash.h"
 #include "eBPF.h"
-
+#include "repository.h"
 class EBpfThread : public Thread{
  private:
-        ProtectedHash* p_res;
-        ProtectedVector* p_fil;
+        Repository* repo;
 
  public:
-        EBpfThread(ProtectedHash* result, ProtectedVector* files) {
-            this->p_res = result;
-            this->p_fil = files;
+        EBpfThread(Repository &repo) {
+            this->repo = &repo;
         }
         virtual void run() {
-            EBPF ebpf;
             std::string file_name;
-            int has_file = this->p_fil->getUnique(&file_name);
+            int has_file = this->repo->getKey(file_name);
             if (has_file == -1) {
                 return;
             }
-            int res = ebpf.identifyCycle(file_name);
-            this->p_res->addUnique(file_name, res);
+            EBPF ebpf(file_name);
+            std::string res;
+            ebpf.getResult(res);
+            this->repo->addResult(file_name, res);
         }
         ~EBpfThread() {}
 };

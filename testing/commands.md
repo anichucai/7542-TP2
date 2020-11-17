@@ -10,7 +10,7 @@ g++ -Wall main.cpp -o tp1
 ## testing_bpf_instruction
 
 g++ -Wall testing_bpf_instruction.cpp bpf_instruction.cpp bpf_instruction.h -o main1
-valgrind ./main1
+valgrind. /main1
 
 ## testing_bpf_reader
 

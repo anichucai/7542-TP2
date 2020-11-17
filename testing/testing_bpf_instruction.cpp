@@ -15,7 +15,7 @@ void linear_arg(){
     correct &= (inst.hasLabel() == false);
     correct &= (inst.cantArguments() == 1);
     string arg;
-    inst.getArgument(&arg,1);
+    inst.getArgument(arg,1);
     correct &= (arg == "[12]");
     cout << "CORRECT? " << correct << endl << endl;
 }
@@ -30,7 +30,7 @@ void jump_1arg(){
     correct &= (inst.hasLabel() == false);
     correct &= (inst.cantArguments() == 1);
     string arg;
-    inst.getArgument(&arg,1);
+    inst.getArgument(arg,1);
     correct &= (arg == "drop");
     cout << "CORRECT? " << correct << endl << endl;
 }
@@ -45,8 +45,8 @@ void jump_2arg(){
     correct &= (inst.hasLabel() == false);
     correct &= (inst.cantArguments() == 2);
     string arg1, arg2;
-    inst.getArgument(&arg1,1);
-    inst.getArgument(&arg2,2);
+    inst.getArgument(arg1,1);
+    inst.getArgument(arg2,2);
     correct &= (arg1 == "#0x806");
     correct &= (arg2 == "drop");
     cout << "CORRECT? " << correct << endl << endl;
@@ -62,9 +62,9 @@ void jump_3arg(){
     correct &= (inst.hasLabel() == false);
     correct &= (inst.cantArguments() == 3);
     string arg1, arg2, arg3;
-    inst.getArgument(&arg1,1);
-    inst.getArgument(&arg2,2);
-    inst.getArgument(&arg3,3);
+    inst.getArgument(arg1,1);
+    inst.getArgument(arg2,2);
+    inst.getArgument(arg3,3);
     correct &= (arg1 == "#0x806");
     correct &= (arg2 == "drop");
     correct &= (arg3 == "22");
@@ -81,7 +81,7 @@ void ret_arg(){
     correct &= (inst.hasLabel() == false);
     correct &= (inst.cantArguments() == 1);
     string arg;
-    inst.getArgument(&arg,1);
+    inst.getArgument(arg,1);
     correct &= (arg == "[12]");
     cout << "CORRECT? " << correct << endl << endl;
 }
@@ -96,7 +96,7 @@ void label_linear_arg(){
     correct &= (inst.hasLabel() == true);
     correct &= (inst.cantArguments() == 1);
     string arg;
-    inst.getArgument(&arg,1);
+    inst.getArgument(arg,1);
     correct &= (arg == "[12]");
     cout << "ARGg: "<< arg << endl;
     cout << "CORRECT? " << correct << endl << endl;
@@ -112,7 +112,7 @@ void label_jump_1arg(){
     correct &= (inst.hasLabel() == true);
     correct &= (inst.cantArguments() == 1);
     string arg;
-    inst.getArgument(&arg,1);
+    inst.getArgument(arg,1);
     correct &= (arg == "drop");
     cout << "CORRECT? " << correct << endl << endl;
 }
@@ -127,8 +127,8 @@ void label_jump_2arg(){
     correct &= (inst.hasLabel() == true);
     correct &= (inst.cantArguments() == 2);
     string arg1, arg2;
-    inst.getArgument(&arg1,1);
-    inst.getArgument(&arg2,2);
+    inst.getArgument(arg1,1);
+    inst.getArgument(arg2,2);
     correct &= (arg1 == "#0x806");
     correct &= (arg2 == "drop");
     cout << "CORRECT? " << correct << endl << endl;
@@ -144,9 +144,9 @@ void label_jump_3arg(){
     correct &= (inst.hasLabel() == true);
     correct &= (inst.cantArguments() == 3);
     string arg1, arg2, arg3;
-    inst.getArgument(&arg1,1);
-    inst.getArgument(&arg2,2);
-    inst.getArgument(&arg3,3);
+    inst.getArgument(arg1,1);
+    inst.getArgument(arg2,2);
+    inst.getArgument(arg3,3);
     correct &= (arg1 == "#0x806");
     correct &= (arg2 == "drop");
     correct &= (arg3 == "22");
@@ -163,7 +163,7 @@ void label_ret_arg(){
     correct &= (inst.hasLabel() == true);
     correct &= (inst.cantArguments() == 1);
     string arg;
-    inst.getArgument(&arg,1);
+    inst.getArgument(arg,1);
     correct &= (arg == "[12]");
     cout << "CORRECT? " << correct << endl << endl;
 }
@@ -174,7 +174,7 @@ void label(){
     BpfInstruction inst(s);
     string label;
     bool correct = true;
-    inst.getLabel(&label);
+    inst.getLabel(label);
     correct &= (label == "drop");
     cout << "CORRECT? " << correct << endl << endl;
 }

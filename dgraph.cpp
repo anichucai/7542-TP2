@@ -1,19 +1,17 @@
 #include "dgraph.h"
-#include <utility>
+#include "constants.h"
 
-enum TypeInstructions { NOT_CYCLIC = 0, CYCLIC = 1, UNSTACKED = 2};
+#include <utility>
 
 DGraph::DGraph() {}
 
-int DGraph::addChild(int parent, int child) {
+void DGraph::addChild(int parent, int child) {
     if (this->nodes.find(parent) == this->nodes.end()) {
         std::set<int> children;
         this->nodes.insert(std::pair<int, std::set<int>> (parent, children));
     }
     this->nodes[parent].insert(child);
-    return 0;
 }
-
 
 std::set<int> DGraph::getNodes() {
     std::set<int> nodes;
@@ -29,56 +27,60 @@ std::set<int> DGraph::getNodes() {
     return nodes;
 }
 
-
-int DGraph::cantNodes() {
+int DGraph::numNodes() {
     return getNodes().size();
 }
 
-int DGraph::_isCyclicDfs(int p, std::vector<int>* v, std::vector<int>* s) {
-    if ((*v)[p] == 0) {
-        (*v)[p] = 1;
-        (*s)[p] = 1;
+int DGraph::_dfs(int p, std::vector<int> &v, std::vector<int> &s) {
+    if (v[p] == 0) {
+        v[p] = 1;
+        s[p] = 1;
 
         auto it = this->nodes[p].begin();
         for (; it != this->nodes[p].end(); ++it) {
-            if (!(*v)[*it] && _isCyclicDfs(*it, v, s)) {
+            if (!v[*it] && _dfs(*it, v, s)) {
                 return 1;
-            } else if ((*s)[*it] == 1) {
+            } else if (s[*it] == 1) {
                 return 1;
             }
         }
     }
-    (*s)[p] = 0;
+    s[p] = 0;
     return 0;
 }
 
-int DGraph::isCyclicDfs(int s) {
-    this->cant_nodes = this->cantNodes();
-
-    if (this->cant_nodes == 0) {
-        return NOT_CYCLIC;
+int DGraph::dfs() {
+    this->num_nodes = this->numNodes();
+    if (this->num_nodes == 0) {
+        return 0;
     }
+    std::vector<int> visited(this->num_nodes, 0);
+    std::vector<int> stack(this->num_nodes, 0);
+    return _dfs(0, visited, stack);
+}
 
-    std::vector<int> visited;
-    std::vector<int> stack;
-
-    for (int i = 0; i < this->cant_nodes; i++) {
-        visited.push_back(0);
-        stack.push_back(0);
-    }
-
-    int res = this->_isCyclicDfs(0, &visited, &stack);
-
-    if (res == 1) {
-        return CYCLIC;
-    }
-
-    for (int node = 0; node < this->cant_nodes; node++) {
+int DGraph::_isFullyVisited(std::vector<int> &visited) {
+    for (int node = 0; node < this->num_nodes; node++) {
         if (visited[node] == 0) {
-            return UNSTACKED;
+            return NOT_FULLY_VISITED;
         }
     }
-    return NOT_CYCLIC;
+    return FULLY_VISITED;
+}
+
+int DGraph::isFullyVisited() {
+    this->num_nodes = this->numNodes();
+    if (this->num_nodes == 0) {
+        return FULLY_VISITED;
+    }
+    std::vector<int> visited(this->num_nodes, 0);
+    std::vector<int> stack(this->num_nodes, 0);
+    _dfs(0, visited, stack);
+    return _isFullyVisited(visited);
+}
+
+int DGraph::isCyclic() {
+    return (dfs() == 1) ? CYCLIC : NOT_CYCLIC;
 }
 
 /*

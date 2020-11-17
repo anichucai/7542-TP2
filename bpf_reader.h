@@ -8,12 +8,12 @@
 
 class BpfReader{
  public:
-        BpfReader(std::string file_name);
-        int getLine(std::string* instruction);
+        BpfReader(std::string &file_name);
+        int getLine(std::string &instruction);
         ~BpfReader();
 
  private:
-        bool emptyLine(std::string line);
+        bool emptyLine(std::string &line);
         std::ifstream in_file;
 };
 
